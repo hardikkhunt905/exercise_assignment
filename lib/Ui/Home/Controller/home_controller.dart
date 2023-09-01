@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:exercise_assignment/Constants/Utils/app_urls.dart';
 import 'package:exercise_assignment/Constants/Utils/utils.dart';
 import 'package:exercise_assignment/Constants/constants.dart';
 import 'package:exercise_assignment/Routing/routes.dart';
 import 'package:exercise_assignment/Services/http_service.dart';
-import 'package:exercise_assignment/Values/values.dart';
 import 'package:get/get.dart';
-
 import '../../../Models/ExerciseData/exercise_data.dart';
 
 class HomeController extends GetxController {
@@ -29,8 +25,7 @@ class HomeController extends GetxController {
       if (Utils.checkResponse(statusCode: response.statusCode)) {
         List list = response.data;
         exerciseList = list.map((e) => ExerciseData.fromJson(e)).toList();
-        Debug.setLog("here is response --> ${exerciseList}");
-        update();
+        Debug.setLog("here is response --> $exerciseList");
       }
       isLoading.value = false;
     } catch (e) {
@@ -39,8 +34,8 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> onListItemTab(ExerciseData data) async{
-    await Get.toNamed(Routes.exerciseDetailScreen,arguments: { exerciseIdArg : data});
+  Future<void> onListItemTab({required ExerciseData data}) async{
+    await Get.toNamed(Routes.exerciseDetailScreen,arguments: {exerciseDataArg : data});
   }
 
 }

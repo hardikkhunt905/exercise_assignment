@@ -11,6 +11,11 @@ class MyString{
   static const equipment = "Equipment";
   static const target = "target";
 
+  //Exercise Details screen
+  static const exerciseDetail = "Exercise Details";
+  static const bodyPart = "bodyPart";
+
+
   //dialog strings
 
   //No Internet Dialog Strings

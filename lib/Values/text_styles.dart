@@ -18,6 +18,8 @@ class TextStyles{
   static final signUpTitleTextStyle = titleTextStyle.copyWith(color:MyColor.white,fontWeight: FontWeight.w700,fontSize: 22.sp,fontFamily: uiFontFamily) ;
 
   static final profileTitleStyle = TextStyle(color:MyColor.appTheme,fontWeight: FontWeight.w600,fontSize: Sizes.TEXT_SIZE_16,fontFamily: uiFontFamily);
+  static final detailTitleStyle = TextStyle(color:MyColor.appTheme,fontWeight: FontWeight.w600,fontSize: Sizes.TEXT_SIZE_18,fontFamily: uiFontFamily);
+  static final detailSubTitleStyle = TextStyle(color:MyColor.appTheme,fontWeight: FontWeight.w500,fontSize: Sizes.TEXT_SIZE_16,fontFamily: uiFontFamily);
 
 
   static final _lightScreenHeading1TextStyle = TextStyle(fontSize: 26.0.sp,fontWeight:FontWeight.bold, color: MyColor.black,fontFamily: uiFontFamily);

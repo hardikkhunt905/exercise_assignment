@@ -34,17 +34,6 @@ class Utils {
     return false;
   }
 
-  static dateToday() {
-    DateTime now = DateTime.now();
-    DateTime date = DateTime(now.year, now.month, now.day);
-    return date;
-  }
-
-  static dateTimeToDate({required DateTime dateTime}) {
-    var date = DateFormat("y-MM-dd").format(dateTime);
-    Debug.setLog(date);
-    return date;
-  }
 
   static showSnackBar(String value) {
     Get.showSnackbar(
@@ -83,46 +72,6 @@ class Utils {
     }
   }
 
-  static showToast(
-      {required String value,
-      Color? backgroundColor,
-      Color? textColor,
-      int? duration,
-      String? imagePath,
-      double? backgroundRadius,
-      Border? border,
-      bool? rootNavigator}) {
-    if (countToastDebug) {
-      Toast.show(
-        value,
-        backgroundColor: backgroundColor ?? Colors.black,
-        duration: Toast.lengthShort,
-        gravity: Toast.bottom,
-        backgroundRadius: backgroundRadius ?? 20,
-        border: border,
-        rootNavigator: rootNavigator,
-        textStyle:
-            TextStyle(color: textColor ?? MyColor.white, fontSize: 18.sp),
-      );
-    }
-    // ToastUtil.show(
-    // duration: duration ?? 2,
-    //     ToastDecorator(
-    //       widget: Wrap(alignment: WrapAlignment.center,crossAxisAlignment: WrapCrossAlignment.center,
-    //         children: [
-    //           Image.asset(imagePath ?? ImagePath.appLogo,height: 25.w,width: 25.w,),
-    //           const SpaceW12(),
-    //           Text(
-    //               value,
-    //               style: TextStyle(color: Colors.white,fontSize: 18.sp)
-    //           ),
-    //         ],
-    //       ),
-    //       backgroundColor: backgroundColor ?? Colors.black,
-    //     ),
-    //     context,
-    //     gravity: ToastGravity.bottom);
-  }
 
   static bool checkResponse({required int statusCode}) {
     if (statusCode == 200 || statusCode == 201) {

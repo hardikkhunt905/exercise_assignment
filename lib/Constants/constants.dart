@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 const debug = true;
-const countToastDebug = false;
 const inDevelopment = true;
 
 const uiFontFamily = 'Roboto';
@@ -19,8 +18,7 @@ double screenHeight = ScreenUtil().screenWidth;
 double screenHeightOrg = ScreenUtil().screenHeight;
 
 // Arguments
-const exerciseIdArg = "Exercise Arguments";
-
+const exerciseDataArg = "Exercise Data Arguments";
 
 
 class Debug {
@@ -31,13 +29,6 @@ class Debug {
     if(debug) logger.e(val);
   }
 }
-
-showOverlayProgressBar({Future Function()? close}){
-  Get.showOverlay(asyncFunction: close!,loadingWidget: const Center(
-    child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(MyColor.blue),backgroundColor:Colors.white),
-  ),);
-}
-
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override
