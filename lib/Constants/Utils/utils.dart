@@ -7,7 +7,6 @@ import 'package:exercise_assignment/Elements/Widgets/toast.dart';
 import 'package:exercise_assignment/Values/values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../Elements/Widgets/spaces.dart';
 import 'common_widgets.dart';
 

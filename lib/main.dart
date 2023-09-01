@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:exercise_assignment/Constants/constants.dart';
 import 'package:exercise_assignment/Constants/Utils/utils.dart';
 import 'package:exercise_assignment/GetxBinding/binding.dart';
-import 'package:exercise_assignment/Localization/Translations/translations.dart';
 import 'package:exercise_assignment/Routing/pages.dart';
 import 'package:exercise_assignment/Ui/Splash/Component/splash_screen.dart';
 import 'package:exercise_assignment/themes/theme.dart';
@@ -44,8 +43,6 @@ class MyApp extends StatelessWidget {
               },
               debugShowCheckedModeBanner: false,
               defaultTransition: Transition.cupertino,
-              //translation
-              translationsKeys: AppTranslation.translationsKeys,
               locale: value,
               fallbackLocale: const Locale('en', 'US'),
             );

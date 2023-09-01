@@ -74,7 +74,7 @@ class CommonWidgets {
       borderRadius: BorderRadius.circular(Sizes.WIDTH_10),
       child: ColorFiltered(
           colorFilter: isColorFilter ?? true ? ColorFilter.mode(
-              MyColor.appTheme.withOpacity(0.6), BlendMode.darken) : ColorFilter.mode(MyColor.transparent, BlendMode.color),
+              MyColor.appTheme.withOpacity(0.6), BlendMode.darken) : const ColorFilter.mode(MyColor.transparent, BlendMode.color),
           child: Image.network(
             imagePath,
             errorBuilder: (context, error, stackTrace) =>

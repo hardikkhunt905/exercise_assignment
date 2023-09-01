@@ -13,7 +13,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.6
-  intl: ^0.18.1
   get: ^4.6.5
   flutter_screenutil: ^5.9.0
   logger: ^2.0.1
@@ -26,7 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.2
+  flutter_lints: ^2.0.3
   #flutter pub run change_app_package_name:main com.new.package.name
   change_app_package_name: ^1.1.0
   #flutter pub run build_runner build --delete-conflicting-outputs
@@ -49,7 +48,6 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
-    - assets/icons/
 
   fonts:
     - family: Roboto
