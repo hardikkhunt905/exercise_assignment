@@ -1,18 +1,14 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:exercise_assignment/Constants/constants.dart';
 import 'package:exercise_assignment/Elements/Widgets/Dialog/custom_dialog.dart';
-import 'package:exercise_assignment/Elements/Widgets/Dialog/update_dialog.dart';
 import 'package:exercise_assignment/Elements/Widgets/toast.dart';
 import 'package:exercise_assignment/Values/values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../Elements/Widgets/spaces.dart';
-import '../preferences.dart';
 import 'common_widgets.dart';
 
 class Utils {
@@ -58,7 +54,7 @@ class Utils {
         isDismissible: true,
         padding: EdgeInsets.all(10.w),
         titleText: Container(),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }

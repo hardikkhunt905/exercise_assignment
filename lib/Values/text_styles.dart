@@ -20,12 +20,6 @@ class TextStyles{
   static final profileTitleStyle = TextStyle(color:MyColor.appTheme,fontWeight: FontWeight.w600,fontSize: Sizes.TEXT_SIZE_16,fontFamily: uiFontFamily);
 
 
-
-
-
-
-
-
   static final _lightScreenHeading1TextStyle = TextStyle(fontSize: 26.0.sp,fontWeight:FontWeight.bold, color: MyColor.black,fontFamily: uiFontFamily);
 
   static final darkScreenHeading1TextStyle = _lightScreenHeading1TextStyle.copyWith(color: MyColor.white);

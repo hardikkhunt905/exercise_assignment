@@ -18,11 +18,10 @@ double screenWidth = ScreenUtil().screenWidth;
 double screenHeight = ScreenUtil().screenWidth;
 double screenHeightOrg = ScreenUtil().screenHeight;
 
-// Shared Preference
-const userPreference = "User Preference";
-const userId = "User Id uid";
-const isUserLogIn = "Is User Log IN";
-const googleSpreadSheetId = "Google Spread Sheet Id";
+// Arguments
+const exerciseIdArg = "Exercise Arguments";
+
+
 
 class Debug {
   static void setLog(String val){

@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     _bgImage(data: data),
-                    _listItemWidget(data: data)
+                    GestureDetector(onTap: () => _logic.onListItemTab(data),  child: _listItemWidget(data: data))
                   ],
                 ),
               ),

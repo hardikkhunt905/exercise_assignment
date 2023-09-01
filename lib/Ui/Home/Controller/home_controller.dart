@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:exercise_assignment/Constants/Utils/app_urls.dart';
 import 'package:exercise_assignment/Constants/Utils/utils.dart';
 import 'package:exercise_assignment/Constants/constants.dart';
+import 'package:exercise_assignment/Routing/routes.dart';
 import 'package:exercise_assignment/Services/http_service.dart';
 import 'package:exercise_assignment/Values/values.dart';
 import 'package:get/get.dart';
@@ -37,4 +38,9 @@ class HomeController extends GetxController {
       Debug.setLog("Error getting getExerciseData --> ${e.toString()}");
     }
   }
+
+  Future<void> onListItemTab(ExerciseData data) async{
+    await Get.toNamed(Routes.exerciseDetailScreen,arguments: { exerciseIdArg : data});
+  }
+
 }
