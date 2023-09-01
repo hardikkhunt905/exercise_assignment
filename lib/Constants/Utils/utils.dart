@@ -11,7 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../Elements/Widgets/spaces.dart';
 import '../preferences.dart';
+import 'common_widgets.dart';
 
 class Utils {
   static late final bool isTablet;
@@ -61,49 +63,28 @@ class Utils {
     );
   }
 
-  static Future checkInternet() async {
-    isInternetAvailable = await Utils.hasConnection();
-    if (!isInternetAvailable) {
-      // await CustomDialog().showNoInternetDialog(
-      //   positiveButtonText: MyString.retry,
-      //   onPositiveClick: () async {
-      //     if(isInternetAvailable){
-      //       Navigator.of(Get.context!).pop(true);
-      //     }else{
-      //       Navigator.of(Get.context!).pop(true);
-      //       await checkInternet();
-      //     }
-      //   },
-      //   onNegativeClick: () {
-      //     Navigator.of(Get.context!).pop();
-      //   },
-      // );
-    }
+  static Widget showLoader({double? size}) {
+    return const Center(
+      child: CircularProgressIndicator(
+        color: MyColor.appTheme,
+      ),
+    );
   }
 
-  static showExitDialog() {}
-
-  static Future countData(
-      {required int adCounts,
-      required String key,
-      required bool? isRun}) async {
-    if (isRun != null && isRun) {
-      int count = await Preferences.getPrefInteger(key);
-
-      if (count < adCounts) {
-        count++;
-        await Preferences.setPrefInteger(key, count);
-
-        Utils.showToast(value: "$count / $adCounts - $key");
-        Debug.setLog("$key -> ${count.toString()}");
-        return false;
-      } else {
-        Utils.showToast(value: "0 / $adCounts - $key");
-        await Preferences.setPrefInteger(key, 0);
-        return true;
-      }
+  static Future checkInternet({required void Function() onPositiveClick}) async {
+    isInternetAvailable = await Utils.hasConnection();
+    if (!isInternetAvailable) {
+      await CustomDialog().showNoInternetDialog(
+        positiveButtonText: MyString.tryAgain,
+        negativeButtonText: MyString.cancel,
+        onPositiveClick: () async => {Get.back(),await checkInternet(onPositiveClick: onPositiveClick )},
+        onNegativeClick: () {
+          Navigator.of(Get.context!).pop();
+        },
+      );
+    } else {
+      onPositiveClick();
     }
-    return false;
   }
 
   static showToast(
@@ -146,6 +127,139 @@ class Utils {
     //     context,
     //     gravity: ToastGravity.bottom);
   }
+
+  static bool checkResponse({required int statusCode}) {
+    if (statusCode == 200 || statusCode == 201) {
+      return true;
+    } else {
+      showBottomToast(value: MyString.somethingWrong,);
+      return false;
+    }
+  }
+
+  static Future<bool> onWillPop() async {
+    return warningDialog(
+      positiveButtonText: MyString.yes,
+      negativeButtonText: MyString.no,
+      dialogTitle: MyString.areYouSure,
+      dialogBody: MyString.exitDialogDetail,
+      onNegativeClick: () => Navigator.of(Get.context!).pop(),
+      onPositiveClick: () => SystemNavigator.pop(),
+    );
+  }
+
+  static warningDialog(
+      {String? dialogTitle,
+        String? dialogBody,
+        Widget? bodyWidget,
+        String? negativeButtonText,
+        String? positiveButtonText,
+        Color? positiveButtonColor,
+        Color? negativeButtonColor,
+        bool isReverse = false,
+        bool? barrierDismissible,
+        bool? isSingleButton,
+        TextStyle? titleStyle,
+        void Function()? onNegativeClick,
+        void Function()? onPositiveClick}) {
+    final textStyle = TextStyles.profileTitleStyle
+        .copyWith(color: MyColor.black, fontSize: Sizes.TEXT_SIZE_18);
+    return CustomDialog().showCustomDialog(
+      barrierDismissible: barrierDismissible,
+      bottomColor: MyColor.white,
+      dialogBody: dialogBody,
+      bodyWidget: bodyWidget,
+      dialogTitle: dialogTitle ?? MyString.areYouSure,
+      negativeButtonText: negativeButtonText ?? MyString.cancel,
+      positiveButtonText: positiveButtonText,
+      titleStyle: titleStyle ?? textStyle.copyWith(color: MyColor.appTheme),
+      bodyStyle: textStyle.copyWith(
+          fontSize: Sizes.TEXT_SIZE_16, fontWeight: FontWeight.w400),
+      onNegativeClick: onNegativeClick,
+      onPositiveClick: onPositiveClick,
+      buttonWidget: Column(
+        children: [
+          const SpaceH20(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal : Sizes.WIDTH_20, vertical: Sizes.HEIGHT_10),
+            child: Row(
+              mainAxisAlignment: isSingleButton ?? false ?  MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
+              children: [
+                CommonWidgets.commonButton(
+                    width: Get.mediaQuery.size.width / 3.2,
+                    title: negativeButtonText ?? MyString.cancel,
+                    onTap: onNegativeClick ?? () => Get.back(),
+                    borderColor:
+                    isReverse ? MyColor.appTheme : MyColor.transparent,
+                    bgColor: isReverse
+                        ? MyColor.white
+                        : MyColor.appTheme,
+                    textColor: isReverse ? MyColor.appTheme : MyColor.white),
+                isSingleButton ?? false ? const SizedBox.shrink() : CommonWidgets.commonButton(
+                    width: Get.mediaQuery.size.width / 3.2,
+                    title: positiveButtonText ?? MyString.save,
+                    onTap: onPositiveClick ?? () => {},
+                    borderColor:
+                    isReverse ? MyColor.transparent : MyColor.appTheme,
+                    bgColor: isReverse
+                        ? MyColor.appTheme
+                        : MyColor.white,
+                    textColor: isReverse ? MyColor.white : MyColor.appTheme) ,
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static showBottomToast(
+      {required String value,
+        Color? backgroundColor,
+        Color? textColor,
+        int? duration,
+        String? imagePath,
+        double? backgroundRadius,
+        Border? border,
+        bool? rootNavigator}) {
+    Toast.show(
+      value,
+      backgroundColor: backgroundColor ?? MyColor.appTheme,
+      duration: Toast.lengthShort,
+      gravity: Toast.bottom,
+      backgroundRadius: backgroundRadius ?? Sizes.RADIUS_12,
+      border: border,
+      rootNavigator: rootNavigator,
+      textAlign: TextAlign.center,
+      textStyle: TextStyles.profileTitleStyle
+          .copyWith(color: textColor ?? MyColor.white),
+    );
+  }
+
+  static showWarningToast(
+      {required String value,
+        Color? backgroundColor,
+        Color? textColor,
+        int? duration,
+        String? imagePath,
+        double? backgroundRadius,
+        Border? border,
+        bool? rootNavigator}) {
+    Toast.show(
+      value,
+      backgroundColor: backgroundColor ?? MyColor.appTheme,
+      duration: Toast.lengthShort,
+      gravity: Toast.bottom,
+      backgroundRadius: backgroundRadius ?? Sizes.RADIUS_12,
+      border: border,
+      rootNavigator: rootNavigator,
+      textAlign: TextAlign.center,
+      textStyle: TextStyles.profileTitleStyle
+          .copyWith(color: textColor ?? MyColor.white),
+    );
+  }
+
 
 
 }

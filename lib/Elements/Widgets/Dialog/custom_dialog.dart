@@ -4,6 +4,8 @@ import 'package:exercise_assignment/Values/values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../Constants/Utils/utils.dart';
+
 ///
 /// This is the Info dialog with 4 different varients as follows:
 /// 1. Sucess (Green color)
@@ -125,32 +127,50 @@ class CustomDialog {
     String? dialogTitle,
     TextStyle? titleStyle,
     Widget? bodyWidget,
+    Widget? buttonWidget,
     String? dialogBody,
     TextStyle? bodyStyle,
     String? positiveButtonText,
     String? negativeButtonText,
-    required void Function() onPositiveClick,
-    required void Function() onNegativeClick,
-  }) =>
+    bool? isButton,
+    bool? barrierDismissible,
+    void Function()? onPositiveClick,
+    void Function()? onNegativeClick,
+  })  =>
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,// barrierDismissible ?? false,
           context: Get.context!,
-          builder: (context) => DialogWidget(
-                key: key,
-                height: height,
-                bottomColor: bottomColor,
-                bodyWidget: bodyWidget,
-                bodyStyle: bodyStyle,
-                negativeButtonText: negativeButtonText,
-                positiveButtonText: positiveButtonText,
-                titleStyle: titleStyle,
-                titleWidget: titleWidget,
-                topColor: topColor,
-                topIcon: topIcon,
-                dialogTitle: dialogTitle,
-                dialogBody: dialogBody,
-                onPositiveClick: onPositiveClick,
-                onNegativeClick: onNegativeClick,
+          builder: (context) =>
+              Dialog(
+                insetAnimationCurve: Curves.easeIn,
+                insetPadding: EdgeInsets.symmetric(vertical: Sizes.HEIGHT_10,horizontal: Sizes.WIDTH_20),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Sizes.RADIUS_10)),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Sizes.WIDTH_20,vertical: Sizes.HEIGHT_20),
+                  child: Wrap(
+                    children: [
+                      DialogWidget(isButton: isButton, padding: EdgeInsets.zero,
+                        key: key,
+                        barrierDismissible : barrierDismissible,
+                        height: height,
+                        bottomColor: bottomColor,
+                        bodyWidget: bodyWidget,
+                        bodyStyle: bodyStyle,
+                        negativeButtonText: negativeButtonText,
+                        positiveButtonText: positiveButtonText,
+                        titleStyle: titleStyle,
+                        titleWidget: titleWidget,
+                        topColor: topColor,
+                        topIcon: topIcon,
+                        dialogTitle: dialogTitle,
+                        dialogBody: dialogBody,
+                        buttonWidget: buttonWidget,
+                        onPositiveClick: onPositiveClick,
+                        onNegativeClick: onNegativeClick,
+                      )
+                    ],
+                  ),
+                ),
               ));
 
   showUpdateDialog(
@@ -165,6 +185,32 @@ class CustomDialog {
           barrierColor: barrierColor,
           barrierLabel: barrierLabel,
           transitionDuration: transitionDuration);
+
+  showNoInternetDialog({
+    double? height,
+    Color? bottomColor,
+    Color? topColor,
+    String? topIcon,
+    Widget? titleWidget,
+    String? dialogTitle,
+    TextStyle? titleStyle,
+    Widget? bodyWidget,
+    String? dialogBody,
+    TextStyle? bodyStyle,
+    String? positiveButtonText,
+    String? negativeButtonText,
+    required void Function() onPositiveClick,
+    required void Function() onNegativeClick,
+  }) => Utils.warningDialog(
+    positiveButtonText: positiveButtonText ?? MyString.cancel,
+    negativeButtonText: negativeButtonText ?? MyString.tryAgain,
+    dialogTitle: dialogTitle ?? MyString.internetTitle,
+    dialogBody: dialogBody ?? MyString.internetWarning,
+    onNegativeClick: onNegativeClick,
+    onPositiveClick: onPositiveClick,
+    isReverse: true,
+  );
+
 }
 
 class CustomConfirmDialog {

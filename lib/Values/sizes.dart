@@ -81,6 +81,7 @@ class Sizes {
   static  double HEIGHT_14 = 14.0.h;
   static  double HEIGHT_10 = 10.0.h;
   static  double HEIGHT_8 = 8.0.h;
+  static  double HEIGHT_5 = 5.0.h;
   static  double HEIGHT_4 = 4.0.h;
   static  double HEIGHT_3 = 3.0.h;
   static  double HEIGHT_2 = 2.0.h;

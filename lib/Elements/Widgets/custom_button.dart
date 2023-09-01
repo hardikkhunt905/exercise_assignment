@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:exercise_assignment/Constants/Extensions/extensions.dart';
 import 'package:exercise_assignment/Constants/Utils/utils.dart';
 import 'package:exercise_assignment/Elements/Widgets/spaces.dart';
 import 'package:exercise_assignment/Values/values.dart';
@@ -13,62 +12,70 @@ class CustomButton extends StatelessWidget {
   final Color bgColor;
   final double elevation;
   final Color fgColor;
-  final Color pressedColor;
+  final Color? pressedColor;
   final String title;
   final double borderWidth;
   final Color borderColor;
   final Size? size;
+  final double? width;
+  final double? height;
   final bool shrink;
 
   const CustomButton(
       {Key? key,
-      required this.title,
-      this.radius,
-      this.borderWidth = 0,
-      this.borderColor = Colors.transparent,
-      this.padding,
-      this.textStyle,
-      required this.onTap,
-      this.bgColor = MyColor.buttonColor,
-      this.elevation = 0,
-      this.pressedColor = MyColor.appTheme,
-      this.size,
-      this.shrink = false,
-      this.fgColor = MyColor.white})
+        required this.title,
+        this.radius,
+        this.borderWidth = 0,
+        this.borderColor = Colors.transparent,
+        this.padding,
+        this.textStyle,
+        required this.onTap,
+        this.bgColor = MyColor.buttonColor,
+        this.elevation = 0,
+        this.pressedColor,
+        this.size,
+        this.width,
+        this.height,
+        this.shrink = false,
+        this.fgColor = MyColor.white})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => onTap(),
-      clipBehavior: Clip.antiAlias,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(bgColor),
-        foregroundColor: MaterialStateProperty.all(fgColor),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        side: MaterialStateProperty.all(BorderSide(
-            color: borderColor, style: BorderStyle.solid, width: borderWidth)),
-        elevation: MaterialStateProperty.all(elevation),
-        padding: MaterialStateProperty.all(
-            padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5)),
-        overlayColor: MaterialStateProperty.all(pressedColor),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius ?? 30))),
-        animationDuration: const Duration(milliseconds: 500),
-        splashFactory: InkSplash.splashFactory,
-        maximumSize: shrink
-            ? null
-            : MaterialStateProperty.all(
-                size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
-        minimumSize: shrink
-            ? null
-            : MaterialStateProperty.all(
-                size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
-        visualDensity: VisualDensity.standard,
-        // padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-        // surfaceTintColor:  MaterialStateProperty.all(Colors.greenAccent)
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        onPressed: () => onTap(),
+        clipBehavior: Clip.antiAlias,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(bgColor),
+          foregroundColor: MaterialStateProperty.all(fgColor),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          side: MaterialStateProperty.all(BorderSide(
+              color: borderColor, style: BorderStyle.solid, width: borderWidth)),
+          elevation: MaterialStateProperty.all(elevation),
+          padding: MaterialStateProperty.all(
+              padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5)),
+          overlayColor: MaterialStateProperty.all(pressedColor ?? MyColor.appTheme.withOpacity(0.1)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius ?? 30))),
+          animationDuration: const Duration(milliseconds: 500),
+          splashFactory: InkSplash.splashFactory,
+          maximumSize: shrink
+              ? null
+              : MaterialStateProperty.all(
+              size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
+          minimumSize: shrink
+              ? null
+              : MaterialStateProperty.all(
+              size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
+          visualDensity: VisualDensity.standard,
+          // padding: MaterialStateProperty.all(EdgeInsets.all(20)),
+          // surfaceTintColor:  MaterialStateProperty.all(Colors.greenAccent)
+        ),
+        child: Center(child: Text(title, style: textStyle)),
       ),
-      child: Text(title, style: textStyle),
     );
   }
 }
@@ -90,19 +97,19 @@ class CustomIconButton extends StatelessWidget {
 
   const CustomIconButton(
       {Key? key,
-      required this.icon,
-      this.radius,
-      this.borderWidth = 0,
-      this.borderColor = Colors.transparent,
-      this.padding,
-      this.fontSize,
-      required this.onTap,
-      this.bgColor = MyColor.buttonColor,
-      this.elevation = 0,
-      this.pressedColor = MyColor.appTheme,
-      this.size,
-      this.shrink = true,
-      this.fgColor = MyColor.white})
+        required this.icon,
+        this.radius,
+        this.borderWidth = 0,
+        this.borderColor = Colors.transparent,
+        this.padding,
+        this.fontSize,
+        required this.onTap,
+        this.bgColor = MyColor.buttonColor,
+        this.elevation = 0,
+        this.pressedColor = MyColor.appTheme,
+        this.size,
+        this.shrink = true,
+        this.fgColor = MyColor.white})
       : super(key: key);
 
   @override
@@ -127,11 +134,11 @@ class CustomIconButton extends StatelessWidget {
         maximumSize: shrink
             ? null
             : MaterialStateProperty.all(
-                size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
+            size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
         minimumSize: shrink
             ? null
             : MaterialStateProperty.all(
-                size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
+            size ?? (Utils.isTablet ? Size(120.w, 48.h) : Size(60.w, 48.h))),
         visualDensity: VisualDensity.standard,
         // padding: MaterialStateProperty.all(EdgeInsets.all(20)),
         // surfaceTintColor:  MaterialStateProperty.all(Colors.greenAccent)
@@ -189,9 +196,10 @@ class CustomAccessButton extends StatelessWidget {
             title!,
             style: textStyle,
           )
-              : Container(),
+              : const SizedBox.shrink(),
         ],
       ),
     );
   }
 }
+

@@ -17,6 +17,8 @@ class TextStyles{
 
   static final signUpTitleTextStyle = titleTextStyle.copyWith(color:MyColor.white,fontWeight: FontWeight.w700,fontSize: 22.sp,fontFamily: uiFontFamily) ;
 
+  static final profileTitleStyle = TextStyle(color:MyColor.appTheme,fontWeight: FontWeight.w600,fontSize: Sizes.TEXT_SIZE_16,fontFamily: uiFontFamily);
+
 
 
 

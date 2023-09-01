@@ -6,32 +6,35 @@ class MyString{
   static const appName = "FITbasix Fitness";
 
   //Home screen
-  static const exercise = "Exercise";
+  static const exercise = "Exercises";
+  static const save = "Save";
+  static const equipment = "Equipment";
+  static const target = "target";
+
+  //dialog strings
+
+  //No Internet Dialog Strings
+  static const tryAgain = "Try again";
+  static const internetTitle = "Problem Connecting";
+  static const internetWarning = "Check your internet connection and try again.";
+
+  //exit dialog Strings
+  static const areYouSure = "Are you sure?";
+  static const exitDialogDetail = "Do you want to exit an App";
+  static const exit = "Exit";
+  static const no = "No";
+  static const yes = "Yes";
+
+  //warning strings
+  static const somethingWrong = "Something went wrong please retry!";
 
   // basic strings
   static const confirm = "Confirm";
-  static const exit = "Exit";
   static const retry = "Retry";
   static const update = "update";
   static const later = "Later";
 
-  static const exitDialogTitle = "Confirm Exit?";
-  static const exitDialogBody = "This will close the app do you want to close the App?";
 
-  static const noInternetTitle = "No Internet Connection";
-  static const noInternetBody = "You don't seem to be connected to the internet. Please check your connection and try again or exit and retry later.";
-
-  static const softUpdateTitle = "Do you want to update the app?";
-  static const softUpdateBody = "The new version of the app is available on the play store click update to update the application.";
-
-  static const hardUpdateTitle = "Update is required for app";
-  static const hardUpdateBody = "You don't seem to have the latest version of the app to use an app update is required click on update to update the app.";
-
-
-
-
-  static const yes = "Yes";
-  static const no = "No";
   static const cancel = "Cancel";
   static const done = "Done";
 
@@ -65,8 +68,6 @@ class MyString{
   static const validEmail = "Enter valid email";
   static const validPassword = "Enter valid password";
   static const passwordLengthError = "invalid length";
-
-  static const somethingWrong = "Something is wrong";
 
 
   static const backupDescription= "Back up your data to google drive. You can restore them when you reinstall app.";
