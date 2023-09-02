@@ -10,6 +10,7 @@ class HomeController extends GetxController {
   HttpService services = HttpService();
   RxBool isLoading = false.obs;
   List<ExerciseData> exerciseList = [];
+  int visibleItemCount = 0;
 
   @override
   void onInit() async {
@@ -25,7 +26,9 @@ class HomeController extends GetxController {
       if (Utils.checkResponse(statusCode: response.statusCode)) {
         List list = response.data;
         exerciseList = list.map((e) => ExerciseData.fromJson(e)).toList();
+        visibleItemCount = 10;
         Debug.setLog("here is response --> $exerciseList");
+        update();
       }
       isLoading.value = false;
     } catch (e) {
@@ -36,6 +39,11 @@ class HomeController extends GetxController {
 
   Future<void> onListItemTab({required ExerciseData data}) async{
     await Get.toNamed(Routes.exerciseDetailScreen,arguments: {exerciseDataArg : data});
+  }
+
+  void loadMoreItem() async{
+    await Future.delayed(const Duration(seconds: 1),() => visibleItemCount+=10);
+    update();
   }
 
 }

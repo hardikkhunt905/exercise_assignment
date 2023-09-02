@@ -31,7 +31,9 @@ class HomeScreen extends StatelessWidget {
           CustomScrollView(
             slivers: [
               CommonWidgets.appBar(title: MyString.exercise),
-              _listWidget()
+              GetBuilder<HomeController>(builder: (logic) {
+                return _listWidget();
+              })
             ],
           ),
           _logic.isLoading.value ? Utils.showLoader() : const SizedBox.shrink()
@@ -46,9 +48,12 @@ class HomeScreen extends StatelessWidget {
           horizontal: Sizes.WIDTH_10, vertical: Sizes.HEIGHT_10),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
-          childCount: _logic.exerciseList.length,
+          childCount: _logic.visibleItemCount,
               (BuildContext context, int index) {
             ExerciseData data = _logic.exerciseList[index];
+            if (index == _logic.visibleItemCount-1) {
+              _logic.loadMoreItem();
+            }
             return Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Sizes.WIDTH_10, vertical: Sizes.HEIGHT_10),
